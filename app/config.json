@@ -4,12 +4,16 @@
       "car": {
         "path": "car/car.obj",
         "flip_uvs": false
-      }
+      },
+      "ground": {
+    "path": "ground/ground.obj",
+    "flip_uvs": false
+}
     }
   },
   "window": {
-    "height": 600,
+    "height": 800,
     "title": "Hello, window!",
-    "width": 800
+    "width": 1000
   }
 }

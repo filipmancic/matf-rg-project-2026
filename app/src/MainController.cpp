@@ -43,22 +43,43 @@ void MainController::draw() {
         graphics->camera()->view_matrix()
     );
 
-    glm::mat4 model = glm::mat4(1.0f);
+glm::mat4 model = glm::mat4(1.0f);
 
-    model = glm::rotate(
-        model,
-        glm::radians(180.0f),
-        glm::vec3(0.0f, 1.6f, 2.5f)
-    );
+model = glm::translate(model, glm::vec3(0.0f, -1.2f, 0.0f));
 
-    model = glm::scale(
-        model,
-        glm::vec3(0.08f)
-    );
+model = glm::rotate(
+    model,
+    glm::radians(90.0f),
+    glm::vec3(1.0f, 0.0f, 0.0f)
+);
+
+model = glm::rotate(
+    model,
+    glm::radians(180.0f),
+    glm::vec3(0.0f, 1.0f, 0.0f)
+);
+
+model = glm::scale(
+    model,
+    glm::vec3(0.06f)
+);
 
     shader->set_mat4("model", model);
 
     car->draw(shader);
+
+    auto ground = resources->model("ground");
+
+    glm::mat4 ground_model = glm::mat4(1.0f);
+
+    ground_model = glm::translate(
+        ground_model,
+        glm::vec3(0.0f, -1.0f, 0.0f)
+    );
+
+    shader->set_mat4("model", ground_model);
+
+    ground->draw(shader);
 }
 
 void MainController::end_draw() {
