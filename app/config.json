@@ -3,7 +3,7 @@
     "models": {
       "car": {
         "path": "car/car.obj",
-        "flip_uvs": false
+        "flip_uvs": true
       },
       "ground": {
     "path": "ground/ground.obj",

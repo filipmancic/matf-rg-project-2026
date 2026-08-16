@@ -19,6 +19,22 @@ void MainController::begin_draw() {
     engine::graphics::OpenGL::clear_buffers();
 }
 
+void MainController::draw_skybox() {
+    auto shader =
+        engine::core::Controller::get<
+            engine::resources::ResourcesController
+        >()->shader("skybox");
+
+    auto skybox =
+        engine::core::Controller::get<
+            engine::resources::ResourcesController
+        >()->skybox("skybox");
+
+    engine::core::Controller::get<
+        engine::graphics::GraphicsController
+    >()->draw_skybox(shader, skybox);
+}
+
 void MainController::draw() {
     auto graphics =
         engine::core::Controller::get<
@@ -59,6 +75,12 @@ model = glm::rotate(
     glm::vec3(0.0f, 1.0f, 0.0f)
 );
 
+model = glm::rotate(
+    model,
+    glm::radians(20.0f),
+    glm::vec3(0.0f, 0.0f, 1.0f)
+);
+
 model = glm::scale(
     model,
     glm::vec3(0.06f)
@@ -80,7 +102,9 @@ model = glm::scale(
     shader->set_mat4("model", ground_model);
 
     ground->draw(shader);
+    draw_skybox();
 }
+
 
 void MainController::end_draw() {
     engine::core::Controller::get<
