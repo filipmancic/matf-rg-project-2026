@@ -8,9 +8,7 @@ namespace app {
 void MainController::initialize() {
     engine::graphics::OpenGL::enable_depth_testing();
 
-    auto graphics =
-        engine::core::Controller::get<
-            engine::graphics::GraphicsController>();
+    auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
 
     graphics->camera()->Position = glm::vec3(0.0f, 0.0f, 10.0f);
 }
@@ -20,42 +18,24 @@ void MainController::begin_draw() {
 }
 
 void MainController::draw_skybox() {
-    auto shader =
-        engine::core::Controller::get<
-            engine::resources::ResourcesController
-        >()->shader("skybox");
-
-    auto skybox =
-        engine::core::Controller::get<
-            engine::resources::ResourcesController
-        >()->skybox("skybox");
-
-    engine::core::Controller::get<
-        engine::graphics::GraphicsController
-    >()->draw_skybox(shader, skybox);
+    auto shader = engine::core::Controller::get<engine::resources::ResourcesController>()->shader("skybox");
+    auto skybox = engine::core::Controller::get<engine::resources::ResourcesController>()->skybox("skybox");
+    engine::core::Controller::get<engine::graphics::GraphicsController>()->draw_skybox(shader, skybox);
 }
 
 void MainController::draw() {
-    auto graphics =
-        engine::core::Controller::get<
-            engine::graphics::GraphicsController>();
+    auto graphics = engine::core::Controller::get<engine::graphics::GraphicsController>();
 
-    auto resources =
-        engine::core::Controller::get<
-            engine::resources::ResourcesController>();
+    auto resources = engine::core::Controller::get<engine::resources::ResourcesController>();
 
     auto shader = resources->shader("basic");
     auto car = resources->model("car");
     auto car_2 = resources->model("car_2");
     auto ground = resources->model("ground");
 
-    float dirIntensity =
-        m_directional_light_enabled ? 1.0f : 0.0f;
+    float dirIntensity = m_directional_light_enabled ? 1.0f : 0.0f;
 
-    float pointIntensity =
-        m_point_light_enabled
-            ? m_point_light_intensity
-            : 0.0f;
+    float pointIntensity = m_point_light_enabled ? m_point_light_intensity : 0.0f;
 
     shader->use();
 
@@ -122,20 +102,17 @@ void MainController::draw() {
 
     shader->set_vec3(
         "pointLight.ambient",
-        glm::vec3(0.03f, 0.015f, 0.01f) *
-            pointIntensity
+        glm::vec3(0.03f, 0.015f, 0.01f) * pointIntensity
     );
 
     shader->set_vec3(
         "pointLight.diffuse",
-        glm::vec3(1.0f, 0.45f, 0.15f) *
-            pointIntensity
+        glm::vec3(1.0f, 0.45f, 0.15f) * pointIntensity
     );
 
     shader->set_vec3(
         "pointLight.specular",
-        glm::vec3(1.0f, 0.6f, 0.3f) *
-            pointIntensity
+        glm::vec3(1.0f, 0.6f, 0.3f) * pointIntensity
     );
 
     // Prvi model auta
@@ -217,41 +194,25 @@ void MainController::draw() {
 }
 
 void MainController::poll_events() {
-    auto platform =
-        engine::core::Controller::get<
-            engine::platform::PlatformController>();
+    auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
 
     // 1 -> Directional light ON/OFF
-    if (
-        platform->key(engine::platform::KEY_1).state() ==
-        engine::platform::Key::State::JustPressed
-    ) {
-        m_directional_light_enabled =
-            !m_directional_light_enabled;
+    if (platform->key(engine::platform::KEY_1).state() == engine::platform::Key::State::JustPressed) {
+        m_directional_light_enabled = !m_directional_light_enabled;
     }
 
     // 2 -> Point light ON/OFF
-    if (
-        platform->key(engine::platform::KEY_2).state() ==
-        engine::platform::Key::State::JustPressed
-    ) {
-        m_point_light_enabled =
-            !m_point_light_enabled;
+    if (platform->key(engine::platform::KEY_2).state() == engine::platform::Key::State::JustPressed) {
+        m_point_light_enabled = !m_point_light_enabled;
     }
 
     // UP - jaci intenzitet point light
-    if (
-        platform->key(engine::platform::KEY_UP).state() ==
-        engine::platform::Key::State::JustPressed
-    ) {
+    if (platform->key(engine::platform::KEY_UP).state() == engine::platform::Key::State::JustPressed) {
         m_point_light_intensity += 0.1f;
     }
 
     // DOWN - smanji point light
-    if (
-        platform->key(engine::platform::KEY_DOWN).state() ==
-        engine::platform::Key::State::JustPressed
-    ) {
+    if (platform->key(engine::platform::KEY_DOWN).state() == engine::platform::Key::State::JustPressed) {
         m_point_light_intensity -= 0.1f;
 
         if (m_point_light_intensity < 0.0f) {
@@ -260,14 +221,10 @@ void MainController::poll_events() {
     }
 
     // E - timer
-    if (
-        platform->key(engine::platform::KEY_E).state() ==
-        engine::platform::Key::State::JustPressed
-    ) {
+    if (platform->key(engine::platform::KEY_E).state() == engine::platform::Key::State::JustPressed) {
         m_event_sequence_active = true;
         m_event_timer = 0.0f;
         m_event_stage = 0;
-
         m_point_light_enabled = true;
         m_directional_light_enabled = true;
     }
@@ -278,39 +235,27 @@ void MainController::update() {
         return;
     }
 
-    auto platform =
-        engine::core::Controller::get<
-            engine::platform::PlatformController>();
+    auto platform = engine::core::Controller::get<engine::platform::PlatformController>();
 
     m_event_timer += platform->dt();
 
     // EVENT A - nakon 1 sekunde
-    if (
-        m_event_stage == 0 &&
-        m_event_timer >= 1.0f
-    ) {
+    if (m_event_stage == 0 && m_event_timer >= 1.0f) {
         m_point_light_enabled = false;
-
         m_event_stage = 1;
         m_event_timer = 0.0f;
     }
 
     // EVENT B - nakon jos 2 sekunde
-    else if (
-        m_event_stage == 1 &&
-        m_event_timer >= 2.0f
-    ) {
+    else if (m_event_stage == 1 && m_event_timer >= 2.0f) {
         m_directional_light_enabled = false;
-
         m_event_stage = 2;
         m_event_sequence_active = false;
     }
 }
 
 void MainController::end_draw() {
-    engine::core::Controller::get<
-        engine::platform::PlatformController
-    >()->swap_buffers();
+    engine::core::Controller::get<engine::platform::PlatformController>()->swap_buffers();
 }
 
 }
