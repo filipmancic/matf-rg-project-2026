@@ -1,22 +1,28 @@
-# {NAME-OF-THE-PROJECT}
+# Car scene
 
-{INDEX} - {STUDENT-FULL-NAME}  
-{PROJECT DESCRIPTION}
+mi22190 - Filip Mancic  
+
+3D car scene featuring two textured vehicle models, an asphalt ground surface and a cloudy skybox environment.
+Scene implements two different types of lighting: Directional Light and Point Light. 
+Lighting can be controlled using the keyboard. Point Light intensity can be increased or decreased, 
+while both light sources can be individually enabled or disabled. 
+Project also contains a timed event sequence triggered by keyboard input.
 
 ## Controls
 
-{BUTTON1} -> {ACTION1}  
-{BUTTON2} -> {ACTION2}  
-...  
-{BUTTONN} -> {ACTIONN}
+1 -> Toggle Directional Light ON/OFF  
+2 -> Toggle Point Light ON/OFF  
+UP -> Increase Point Light intensity  
+DOWN -> Decrease Point Light intensity  
+E -> Start timed event sequence  
 
 ## Features
 
 ### Fundamental:
 
-[ ] Model with lighting
-[ ] Two types of lighting with customizable colors and movement through GUI or ACTIONS
-[ ] {ACTION_X} --- AFTER_M_SECONDS---Triggers---> {EVENT_A} ---> AFTER_N_SECONDS---Triggers---> {EVENT_B}
+[X] Model with lighting  
+[X] Two types of lighting with keyboard controls - Directional Light and Point Light  
+[X] E --- AFTER 1 SECOND ---> Point Light turns off ---> AFTER 2 SECONDS ---> Directional Light turns off  
 
 ### Group A:
 
@@ -36,12 +42,16 @@
 
 ## Models:
 
-[link1]   
-[link2]
+Ford Mustang GT 500  
+https://free3d.com/3d-model/ford-mustang_gt-500-193364.html
+
+Porsche 911 GT  
+https://free3d.com/3d-model/porsche-911-gt-43465.html
 
 ## Textures
 
-[link1]  
-[link2]
+Asphalt texture  
+https://www.textures.com/download/asphalt-closeups-0113/57738
 
-{OTHER-RESOURCES}
+Cloudy Skyboxes Pack  
+https://screamingbrainstudios.itch.io/cloudy-skyboxes-pack?download
