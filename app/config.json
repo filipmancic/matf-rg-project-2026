@@ -1,11 +1,23 @@
 {
   "resources": {
     "models": {
+      "car": {
+      "path": "car/car.obj",
+      "flip_uvs": true
+      },
+      "car_2": {
+      "path": "car_2/Porsche_911_GT2.obj",
+      "flip_uvs": true
+      },
+      "ground": {
+      "path": "ground/ground.obj",
+      "flip_uvs": false
+}
     }
   },
   "window": {
-    "height": 600,
-    "title": "Hello, window!",
-    "width": 800
+    "height": 800,
+    "title": "Car scene",
+    "width": 1000
   }
 }
